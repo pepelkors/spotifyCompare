@@ -1,0 +1,22 @@
+import dearpygui.dearpygui as dpg
+
+dpg.create_context()
+
+def change_text(sender, app_data):
+    dpg.set_item_label("text item", "Downloading...")
+
+
+with dpg.item_handler_registry(tag="widget handler") as handler:
+    dpg.add_item_clicked_handler(callback=change_text)
+
+with dpg.window(width=500, height=300):
+    dpg.add_button(tag="text item",label="Download", width=500, height=25)
+
+# bind item handler registry to item
+dpg.bind_item_handler_registry("text item", "widget handler")
+
+dpg.create_viewport(title='Custom Title', width=800, height=600)
+dpg.setup_dearpygui()
+dpg.show_viewport()
+dpg.start_dearpygui()
+dpg.destroy_context()
